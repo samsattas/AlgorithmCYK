@@ -1,0 +1,9 @@
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\bin\Debug\AlgorithmCYK.exe.config
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\bin\Debug\AlgorithmCYK.exe
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\bin\Debug\AlgorithmCYK.pdb
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.csprojAssemblyReference.cache
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.Properties.Resources.resources
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.csproj.GenerateResource.cache
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.csproj.CoreCompileInputs.cache
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.exe
+C:\Users\juano\source\repos\TareaCYK\AlgorithmCYK\AlgorithmCYK\obj\Debug\AlgorithmCYK.pdb
