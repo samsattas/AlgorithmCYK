@@ -10,6 +10,8 @@ namespace AlgorithmCYK.model
     {
         private string input;
         private string[] grammar;
+        private string[,,] matrix;
+        private string[,] data;
 
         public CYK(string inp, string[] inpG)
         {
@@ -24,7 +26,7 @@ namespace AlgorithmCYK.model
 
             //se crea una matrix 2D del tamaño del numero de instrucciones por 2
             //grammarList sera la lista de instrucciones introducidas
-            string[,] grammarlist = new String[grammar.Length, 2];
+             data = new String[grammar.Length, 2];
             Console.WriteLine(grammar.Length);
             Console.WriteLine(grammar.GetLength(0));
 
@@ -33,7 +35,7 @@ namespace AlgorithmCYK.model
             otra para las 'j' 
             y otra para guardar las instrucciones (ej: X13 = A,C,E ; se guarda en i=1, j=3 los A,C,E)
             */
-            string[,,] matrix = new String[size + 1, size, grammarlist.GetLength(0)];
+            matrix = new String[size + 1, size, data.GetLength(0)];
 
 
             //recorre cada uno de los elementos de w
@@ -50,10 +52,10 @@ namespace AlgorithmCYK.model
                  */
 
                 //obtiene el representante de la instruccion (ej: S)
-                grammarlist[i, 0] = grammar[i].Substring(0, 1);// se obtiene la posicion 0 de la instruccion i de la lista de instrucciones
+                data[i, 0] = grammar[i].Substring(0, 1);// se obtiene la posicion 0 de la instruccion i de la lista de instrucciones
 
                 //Obtiene el resultado de la instruccion (ej: AB)
-                grammarlist[i, 1] = grammar[i].Substring(grammar[i].IndexOf("->") + 2); //el substring se mueve 2 para saltar el '->'
+                data[i, 1] = grammar[i].Substring(grammar[i].IndexOf("->") + 2); //el substring se mueve 2 para saltar el '->'
             }
 
             /* GetLength(n) en un array 3D:
@@ -73,14 +75,14 @@ namespace AlgorithmCYK.model
                         int num = 0;
 
                         //recorre todas las instrucciones en busca de la letra minuscula
-                        for (int k = 0; k < grammarlist.GetLength(0); k++)
+                        for (int k = 0; k < data.GetLength(0); k++)
                         {
-                            string[] auxString = grammarlist[k, 1].Split('|');
+                            string[] auxString = data[k, 1].Split('|');
                             for (int y = 0; y < auxString.Length; y++)
                             {
                                 if (matrix[j, i, 0] == auxString[y])
                                 {
-                                    matrix[j - 1, i, num] = grammarlist[k, 0];
+                                    matrix[j - 1, i, num] = data[k, 0];
                                     num++;
                                 }
                             }
@@ -117,10 +119,10 @@ namespace AlgorithmCYK.model
 
                                                 //desde aqui se realiza la busqueda de las combinaciones
                                                 //la 'g' recorre la lista de la gramatica para realizar las posibles combinaciones
-                                                for (int g = 0; g < grammarlist.GetLength(0); g++)
+                                                for (int g = 0; g < data.GetLength(0); g++)
                                                 { //Busque la combinación en la lista gramatical e introdúzcala en el campo
 
-                                                    string[] auxString = grammarlist[g, 1].Split('|');
+                                                    string[] auxString = data[g, 1].Split('|');
 
                                                     for (int o = 0; o < auxString.Length; o++)
                                                     {
@@ -133,11 +135,11 @@ namespace AlgorithmCYK.model
                                                             {
 
                                                                 //verifica que no este repetido en Xij para despues agregar
-                                                                if (matrix[j - 1, i, h] != grammarlist[g, 0])
+                                                                if (matrix[j - 1, i, h] != data[g, 0])
                                                                 {   
                                                                     if (matrix[j - 1, i, h] == null)
                                                                     {
-                                                                        matrix[j - 1, i, h] = grammarlist[g, 0];
+                                                                        matrix[j - 1, i, h] = data[g, 0];
                                                                         break;
                                                                     }
                                                                 }
@@ -169,27 +171,25 @@ namespace AlgorithmCYK.model
                 }
             }
 
-            bool isIn = false;
+            return checkAcceptation();
+        }
+
+        public string checkAcceptation()
+        {
+            Boolean value = false;
+            string answer = "si";
             for (int i = 0; i < matrix.GetLength(2); i++)
             {
-                if (matrix[0, 0, i] == "S") //cambiar por cualquier letra
+                if (matrix[0, 0, i] == data[0, 0]) 
                 {
-                    isIn = true;
-                    break;
+                    value = true;
                 }
             }
-
-            string aux = "";
-
-            if (!isIn)
+            if (value != true)
             {
-                aux = " no";
+                answer = "no";
             }
-
-
-            string finalOutput = "La palabra \"" + input + "\"" + aux + " pertenece a la gramatica dada";
-
-            return finalOutput;
+            return "La palabra \"" + input + "\" " + answer + " pertenece a la gramatica dada";
         }
     }
 }
